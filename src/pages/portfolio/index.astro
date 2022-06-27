@@ -1,0 +1,54 @@
+---
+import {Directus} from "@directus/sdk"
+import Intro from "../../components/Intro.astro"
+import Layout from "../../layouts/layout.astro"
+
+const data_url = 'https://l1y6k0mq.directus.app/'
+const directus = new Directus('https://l1y6k0mq.directus.app/')
+const portfolio_data = await directus.items('portfolio').readByQuery({
+	filter:{
+		"_and":[
+			{
+				"status":{
+					"_eq":"published"
+				}
+			}
+		]
+	},
+	limit:30,
+	sort:"-date_created"
+})
+
+const portfolio = portfolio_data.data
+---
+
+<Layout title="Uzziel Technologies Portfolio" description="I am a freelance Javascript developer and listed on this page are samples of applications that I have already built. Take a look at them.">
+	<Intro 
+  	background="/laptop.webp"
+  	title="My Portfolio"
+		description="Take a look at all the projects I have already done"
+  />
+  <section class="container mx-auto p-4 my-4">
+    <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-6 mt-6 p-2">
+    	{
+    		portfolio.map((item) => (
+					<a href={`/portfolio/${item.slug}`} class="bg-gradient-to-l from-sky-700 via-sky-800 to-sky-900 rounded-xl shadow-md">
+						<figure>
+		          <img class="w-full rounded-tr-xl rounded-tl-xl" src={`${data_url}assets/${item.featured_image}?fit=cover&height=250&width=400&format=webp`} alt={item.title} height="250" width="400">
+		          <div class="px-2">
+		            <h2 class="font-black pb-2 text-center uppercase text-2xl">
+		              {item.title}
+		            </h2>
+		            <figcaption>
+		              <div>
+		              	{item.brief_description}
+		              </div>
+		            </figcaption>
+		          </div>
+		        </figure>
+		      </a>
+    		))
+    	}
+		</div>
+  </section>
+</Layout>

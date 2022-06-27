@@ -1,0 +1,35 @@
+---
+import TheHeader from "../components/TheHeader.vue"
+import "../styles/app.css"
+const {title} = Astro.props
+const {description} = Astro.props
+const {og_image} = Astro.props
+const {og_url} = Astro.props
+---
+<html lang="en-KE">
+  <head>
+    <title>{title}</title>
+    <link rel="icon" type="image/svg" sizes="128x128" href="/public/logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;900&display=swap" rel="stylesheet" />
+    <meta name="robots" content="follow, index" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={og_image} />
+    <meta property="og:url" content={og_url} />
+  </head>
+  <body class="bg-stone-800 text-stone-100">
+    <TheHeader client:load />
+      <main>
+        <slot />
+      </main>
+    <footer class="bg-teal-800 text-white">
+      <div class="mt-0 text-center py-4 text-sm">
+          &copy; { new Date().getFullYear() } Uzziel Technologies - All Rights Reserved
+        </div>
+    </footer>
+  </body>
+</html>

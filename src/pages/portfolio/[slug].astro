@@ -1,0 +1,79 @@
+---
+import {Directus} from "@directus/sdk"
+import Layout from "../../layouts/layout.astro"
+import Intro from "../../components/Intro.astro"
+
+// src/pages/portfolio/[slug].astro
+export async function getStaticPaths() {
+  const data_url = 'https://l1y6k0mq.directus.app/'
+  const directus = new Directus(data_url)
+  const portfolio_data = await directus.items('portfolio').readByQuery({
+    filter:{
+      "_and":[
+        {
+          "status":{
+            "_eq":"published"
+          }
+        }
+      ]
+    },
+    limit:-1,
+    sort:"-date_created",
+    fields:['slug']
+  })
+
+  const portfolio = portfolio_data.data
+
+  let store = []
+
+  portfolio.map((item) => {
+    let data = {}
+    data.params = {}
+    data.params.slug = item.slug
+    store.push(data)
+  })
+  
+  return store
+}
+
+const {slug} = Astro.params
+const data_url = 'https://l1y6k0mq.directus.app/'
+const directus = new Directus(data_url)
+
+const portfolio_data = await directus.items('portfolio').readByQuery({
+  filter:{
+    "_and":[
+      {
+        "status":{
+          "_eq":"published"
+        }
+      },
+      {
+        "slug":{
+          "_eq":slug
+        }
+      }
+    ]
+  }
+})
+
+const portfolio = portfolio_data.data[0]
+---
+
+<Layout title="Uzziel Tech Portfolio">
+  <Intro 
+    background="/laptop.webp"
+    title="My Portfolio"
+    description="Take a look at all the projects I have already done"
+  />
+  <section class="container mx-auto p-4 mt-12 mb-6">
+    <div class="grid sm:grid-cols-2">
+      <div class="prose dark:prose-invert px-6 py-8 space-y-6 rounded-sm sm:p-8 lg:p-12 dark:bg-black" set:html={portfolio.description}></div>
+      <div class="dark:bg-gray-800">
+        <div class="">
+          <img src={`${data_url}assets/${portfolio.main_image}?fit=cover&format=webp`} alt={portfolio.title} class="sm:rounded-tr-lg sm:rounded-br-lg shadow-lg dark:bg-gray-500 sm:min-h-96" width="1080" height="720">
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
