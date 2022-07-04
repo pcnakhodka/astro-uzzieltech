@@ -9,8 +9,8 @@ const {og_url} = Astro.props
 <html lang="en-KE">
   <head>
     <title>{title}</title>
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-    <link rel="preconnect" href="https://l1y6k0mq.directus.app/" crossorigin />
+    <link rel="icon" type="image/svg+xml" href="/images/logo.svg" />
+    <link rel="preconnect" href={import.meta.env.PUBLIC_CMS_LOCATION} crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
     <link href="/fonts.css" rel="stylesheet" />
     <meta name="robots" content="follow, index" />

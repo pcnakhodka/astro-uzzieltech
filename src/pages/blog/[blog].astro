@@ -5,7 +5,7 @@ import Intro from "../../components/Intro.astro"
 
 // src/pages/blog/[blog].astro
 export async function getStaticPaths() {
-  const data_url = 'https://l1y6k0mq.directus.app/'
+  const data_url = import.meta.env.PUBLIC_CMS_LOCATION
   const directus = new Directus(data_url)
   const blogs_data = await directus.items('blog').readByQuery({
     filter:{
@@ -41,9 +41,9 @@ export async function getStaticPaths() {
   return store
 }
 
-const data_url = 'https://l1y6k0mq.directus.app/'
+const data_url = import.meta.env.PUBLIC_CMS_LOCATION
 const {blog} = Astro.params
-const directus = new Directus('https://l1y6k0mq.directus.app/')
+const directus = new Directus(data_url)
 
 const store = await directus.items('blog').readByQuery({
 	filter:{

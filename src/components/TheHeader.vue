@@ -55,7 +55,7 @@
 </template>
 
 <script setup>
-import logo from '/logo.svg'
+import logo from '/images/logo.svg'
 
 const name = 'Uzziel Tech'
 

@@ -3,8 +3,8 @@ import {Directus} from "@directus/sdk"
 import Layout from "../../layouts/layout.astro"
 import Intro from "../../components/Intro.astro"
 
-const data_url = 'https://l1y6k0mq.directus.app/'
-const directus = new Directus('https://l1y6k0mq.directus.app/')
+const data_url = import.meta.env.PUBLIC_CMS_LOCATION
+const directus = new Directus(data_url)
 
 const store = await directus.items('blog').readByQuery({
 	filter:{
@@ -34,7 +34,7 @@ const setExcerpt = (text) => {
 
 <Layout title="Blog - Stay Updated on all the latest information" description="Stay up-to-date on all the latest blog articles from Uzziel Technologies. Find informative tech articles discussing the latest in web development">
   <Intro 
-  	background="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+  	background="/images/laptop.webp"
   	title="Blog"
 		description="Stay updated on all the latest information from Uzziel Technologies"
   />

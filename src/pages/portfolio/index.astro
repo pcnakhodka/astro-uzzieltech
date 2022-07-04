@@ -3,8 +3,8 @@ import {Directus} from "@directus/sdk"
 import Intro from "../../components/Intro.astro"
 import Layout from "../../layouts/layout.astro"
 
-const data_url = 'https://l1y6k0mq.directus.app/'
-const directus = new Directus('https://l1y6k0mq.directus.app/')
+const data_url = import.meta.env.PUBLIC_CMS_LOCATION
+const directus = new Directus(data_url)
 const portfolio_data = await directus.items('portfolio').readByQuery({
 	filter:{
 		"_and":[
@@ -24,7 +24,7 @@ const portfolio = portfolio_data.data
 
 <Layout title="Uzziel Technologies Portfolio" description="I am a freelance Javascript developer and listed on this page are samples of applications that I have already built. Take a look at them.">
 	<Intro 
-  	background="/laptop.webp"
+  	background="/images/laptop.webp"
   	title="My Portfolio"
 		description="Take a look at all the projects I have already done"
   />
