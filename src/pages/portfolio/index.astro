@@ -34,7 +34,7 @@ const portfolio = portfolio_data.data
     		portfolio.map((item) => (
 					<a href={`/portfolio/${item.slug}`} class="bg-gradient-to-l from-sky-700 via-sky-800 to-sky-900 rounded-xl shadow-md">
 						<figure>
-		          <img class="w-full rounded-tr-xl rounded-tl-xl" src={`${data_url}assets/${item.featured_image}?fit=cover&height=250&width=400&format=webp`} alt={item.title} height="250" width="400">
+		          <img class="w-full rounded-tr-xl rounded-tl-xl" src={`${data_url}assets/${item.featured_image}?fit=cover&height=250&width=400&format=webp`} alt={item.title} height="250" width="400" />
 		          <div class="px-2">
 		            <h2 class="font-black pb-2 text-center uppercase text-2xl">
 		              {item.title}
