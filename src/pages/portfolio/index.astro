@@ -29,24 +29,32 @@ const portfolio = portfolio_data.data
 		description="Take a look at all the projects I have already done"
   />
   <section class="container mx-auto p-4 my-4">
-    <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-6 mt-6 p-2">
+    <div class="grid sm:grid-cols-2 gap-6 mt-6 p-2">
     	{
     		portfolio.map((item) => (
-					<a href={`/portfolio/${item.slug}`} class="bg-gradient-to-l from-sky-700 via-sky-800 to-sky-900 rounded-xl shadow-md">
-						<figure>
-		          <img class="w-full rounded-tr-xl rounded-tl-xl" src={`${data_url}assets/${item.featured_image}?fit=cover&height=250&width=400&format=webp`} alt={item.title} height="250" width="400" />
-		          <div class="px-2">
-		            <h2 class="font-black pb-2 text-center uppercase text-2xl">
-		              {item.title}
-		            </h2>
-		            <figcaption>
-		              <div>
-		              	{item.brief_description}
-		              </div>
-		            </figcaption>
-		          </div>
-		        </figure>
-		      </a>
+					<a class="relative block p-8 overflow-hidden border border-gray-100 rounded-lg" href={`/portfolio/${item.slug}`}>
+					  <span	class="absolute inset-x-0 bottom-0 h-2  bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
+					  <div class="justify-between sm:flex">
+					    <div>
+					      <h5 class="text-xl font-bold">
+					        {item.title}
+					      </h5>
+					    </div>
+
+					    <div class="flex-shrink-0 hidden ml-3 sm:block">
+					      <img
+					        class="object-cover w-16 h-16 rounded-lg shadow-sm"
+					        src={`${data_url}assets/${item.featured_image}?fit=cover&height=100&width=100&format=webp`} alt={item.title} height={100} width={100}
+					      />
+					    </div>
+					  </div>
+
+					  <div class="mt-4 sm:pr-8">
+					    <p class="text-sm text-stone-100">
+					      {item.brief_description}
+					    </p>
+					  </div>
+					</a>
     		))
     	}
 		</div>
